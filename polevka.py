@@ -18,7 +18,7 @@ def main():
     ingredients = soup.select('.stuff')
 
     # for i in ingredients:
-    #     print(i)
+    #     print(i) # mohlo by se hodit in range()
     
     print(ingredients.get_text())
 
