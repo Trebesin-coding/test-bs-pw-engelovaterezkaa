@@ -1,21 +1,26 @@
 from playwright.sync_api import sync_playwright
 import os
 
-
-
+username = "Jarmil"
+password = "Admin123"
 
 def main():
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=False)
+        page = browser.new_page()
 
-    # with sync_playwright() as p:
+        page.goto("https://souhrada.github.io/playwright-exam/")
 
-        # browser = p.chromium.launch(headless=False)
+        page.fill('#login', username)
+        page.fill('#pass', password)
 
-        # !!!
-        # na page.locator(selector) se dá použít funkce .text_content(), která vypíše text daného prvku
-        # !!!
+        page.click('.login-btn')
 
+        secret_message = page.locator('.super-secret-text').text_content()
 
-        # browser.close()
+        print(secret_message)
+
+        browser.close()
     
 
 if __name__ == "__main__":
